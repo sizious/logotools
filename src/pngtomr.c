@@ -146,13 +146,16 @@ int read_png(char *file_name, image_t *image)  /* We need to open the file */
 
     png_read_update_info(png_ptr, info_ptr);
 
-    png_bytep row_pointers[height];
+    /* Safety brackets to introduce scope. Not sure if it matters */
+    {
+        png_bytep row_pointers[height];
 
-    for (row = 0; row < height; row++){
-       row_pointers[row] = image->data + image->width*4*row;
+        for (row = 0; row < height; row++){
+           row_pointers[row] = image->data + image->width*4*row;
+        }
+
+        png_read_image(png_ptr, row_pointers);
     }
-
-    png_read_image(png_ptr, row_pointers);
 
     png_read_end(png_ptr, info_ptr);
 
