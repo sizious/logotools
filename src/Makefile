@@ -1,5 +1,5 @@
 CC	= gcc
-CFLAGS	= -O3 -mpentiumpro
+CFLAGS	= -O3
 
 .c.o:
 	$(CC) $(CFLAGS) -o $@ -c $<
@@ -15,6 +15,7 @@ logoinsert: logoinsert.o
 .PHONY : clean
 clean:
 	rm -f *.o
+	rm -f logoinsert pngtomr
 
 .PHONY : distclean
 distclean: clean 
