@@ -15,7 +15,6 @@ logoinsert: logoinsert.o
 .PHONY : clean
 clean:
 	rm -f *.o
-	rm -f logoinsert pngtomr
 
 .PHONY : distclean
 distclean: clean 

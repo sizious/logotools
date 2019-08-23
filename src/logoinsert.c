@@ -76,6 +76,3 @@ int main(int argc, char *argv[])
     fclose(ip);
     fclose(mr);
 }
-    
-    
-
