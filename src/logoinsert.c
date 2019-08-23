@@ -28,6 +28,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(int argc, char *argv[])
 {
@@ -39,21 +40,21 @@ int main(int argc, char *argv[])
     printf("logoinsert 0.1 by adk/napalm\n");
 
     if (argc != 3) {
-	printf("%s <image.mr> <ip.bin>\n",argv[0]);
-	exit(0);
+        printf("%s <image.mr> <ip.bin>\n",argv[0]);
+        exit(0);
     }
 
     mr = fopen(argv[1], "rb");
     ip = fopen(argv[2], "rb+");
 
     if (!mr) {
-	perror(argv[1]);
-	exit(0);
+        perror(argv[1]);
+        exit(0);
     }
 
     if (!ip) {
-	perror(argv[2]);
-	exit(0);
+        perror(argv[2]);
+        exit(0);
     }
 
     fseek(ip, 0x3820, SEEK_SET);
@@ -62,8 +63,9 @@ int main(int argc, char *argv[])
     length = ftell(mr);
     fseek(mr, 0, SEEK_SET);
 
-    if (length > 8192)
-	printf("Warning: this image is larger than 8192 bytes and will corrupt a normal ip.bin, inserting anyway!\n");
+    if (length > 8192){
+        printf("Warning: this image is larger than 8192 bytes and will corrupt a normal ip.bin, inserting anyway!\n");
+    }
 
     data = (char *)malloc(length);
 
@@ -74,6 +76,3 @@ int main(int argc, char *argv[])
     fclose(ip);
     fclose(mr);
 }
-	
-    
-
